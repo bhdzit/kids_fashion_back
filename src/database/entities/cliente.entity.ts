@@ -1,0 +1,29 @@
+
+import {
+    BaseEntity,
+    Column,
+    Entity,
+    PrimaryGeneratedColumn
+} from "typeorm";
+
+
+@Entity("cliente")
+export class ClienteEntity extends BaseEntity {
+    
+    @PrimaryGeneratedColumn()
+    id: number;
+    
+    @Column({type: "varchar"})
+    nombre:string;
+    
+    @Column({type: "varchar"})
+    tel:string;
+
+    @Column({type: "varchar"})
+    padre:string;
+
+    @Column({type: "varchar"})
+    correo:string;
+
+    ultimoCorte:Date;
+}
