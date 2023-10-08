@@ -28,30 +28,35 @@ export abstract class BaseRepository {
     //    throw new ApiException(msg);
   }
 
-  public async store(entity: BaseEntity): Promise<BaseEntity> {
+  public async store(entity: BaseEntity): Promise<BaseEntity[]> {
     if (!this.repository) {
       this.throwException('RepositoryIsNotDefined');
     }
-
-    return await this.repository.create(entity);
+    await this.repository.save(entity);
+    return await this.repository.find();
+     
   }
 
-  public async delete(objectId: number | string): Promise<boolean> {
+  public async delete(objectId: number | string): Promise<BaseEntity[]> {
     let deletion: DeleteResult;
     try {
       deletion = await this.repository.delete(objectId);
+      return await this.repository.find();
     } catch (e) {
       console.log(e);
       console.log(deletion);
     }
-    return <boolean>!!deletion;
+    return [];
   }
 
-  public async update(id,entity: BaseEntity): Promise<BaseEntity> {
+  public async update(objectId:number,payload: BaseEntity): Promise<BaseEntity> {
     if (!this.repository) {
       this.throwException('RepositoryIsNotDefined');
     }
-
-    return await this.repository.save(entity);
+    let entity =await this.findOne({where:{id:objectId}});
+    Object.keys(payload).map(key=>{
+      entity[key]=payload[key];
+    });
+    return await entity.save();
   }
 }

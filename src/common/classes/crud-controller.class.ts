@@ -1,4 +1,4 @@
-import {BadRequestException, Body, Delete, Param, Post, Put} from "@nestjs/common";
+import {BadRequestException, Body, Delete, HttpException, HttpStatus, Param, Post, Put} from "@nestjs/common";
 import {BaseEntity} from "typeorm";
 
 
@@ -29,7 +29,7 @@ export abstract class CrudControllerClass implements ControllerType {
      * @returns Nuevo elemento creado
      */
     @Post("store")
-    public async store(@Body() payload): Promise<BaseEntity> {
+    public async store(@Body() payload): Promise<BaseEntity[]> {
 
         if (!this.service) {
             throw new ApiException("NonInstantiatedService");
@@ -37,12 +37,14 @@ export abstract class CrudControllerClass implements ControllerType {
         if (!this.dto) {
             throw new ApiException("DtoIsNotDefined");
         }
-        const dto:any = plainToInstance(this.dto, payload);
+        const dto = plainToInstance(this.dto, payload);
+
         this.validateDto(dto);
+
         try {
-            return await this.service.store(dto);
+            return await this.service.store(payload);
         } catch (e) {
-            throw new ApiException(e.code);
+            throw new ApiException(e);
         }
     }
 
@@ -55,11 +57,7 @@ export abstract class CrudControllerClass implements ControllerType {
      */
     @Put("/update/:id")
     async update(@Body() payload, @Param("id") id: number): Promise<BaseEntity> {
-        if (!this.dto) {
-            throw new ApiException("DtoIsNotDefined");
-        }
-        const dto = plainToInstance(this.dto, payload);
-        this.validateDto(dto);
+
         try {
             return await this.service.update(id, payload);
         } catch (e) {
@@ -74,7 +72,7 @@ export abstract class CrudControllerClass implements ControllerType {
      * @returns Elemento actualizado
      */
     @Delete("/delete/:id")
-    async delete(@Param("id") id: number | string): Promise<boolean> {
+    async delete(@Param("id") id: number | string): Promise<BaseEntity[]> {
         try {
             return await this.service.delete(id);
         } catch (e) {
@@ -91,12 +89,36 @@ export abstract class CrudControllerClass implements ControllerType {
     private validateDto(dto): void {
         const errors = validateSync(dto, {
             validationError: {
-                target: false
-            }
+                target: true
+            },
+            dismissDefaultMessages:false
         });
+        let costumError = {errors:{
+        }}
+        errors.map(item=>{
+          console.log(this.costumeErrorMsj(item));
+            costumError.errors[item.property]=this.costumeErrorMsj(item);
+        })
 
         if (errors.length > 0) {
-            throw new BadRequestException(errors);
+            console.log(errors);
+            throw new HttpException(costumError,HttpStatus.OK);
         }
     }
+
+    costumeErrorMsj(error):string{
+        const keys = Object.keys(error.constraints)
+        switch (keys[0]) {
+            case 'isNotEmpty':
+                    return "No puede estar vacio"                
+                break;
+        
+            default:
+                return "Verifica el formato de los datos"
+                break;
+        }
+
+        return "";
+    }
+
 }
