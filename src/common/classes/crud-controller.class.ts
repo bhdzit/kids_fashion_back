@@ -106,6 +106,10 @@ export abstract class CrudControllerClass implements ControllerType {
         }
     }
 
+    public isValidate(dto){
+        this.validateDto(dto);
+    }
+
     costumeErrorMsj(error):string{
         const keys = Object.keys(error.constraints)
         switch (keys[0]) {

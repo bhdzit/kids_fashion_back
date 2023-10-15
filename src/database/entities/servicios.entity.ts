@@ -3,16 +3,14 @@ import {
     BaseEntity,
     Column,
     Entity,
-    ManyToOne,
     OneToMany,
     PrimaryGeneratedColumn
 } from "typeorm";
 import { ServiciosProductoEntity } from "./servicios-productos.entity";
 
 
-@Entity("productos")
-export class ProductoEntity extends BaseEntity {
-    
+@Entity("servicios")
+export class ServiciosEntity extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
@@ -20,9 +18,11 @@ export class ProductoEntity extends BaseEntity {
     nombre:string;
 
     @Column({type: "integer"})
-    cantidad:number;
+    tiempo:number;
 
-    @OneToMany(()=>ServiciosProductoEntity,(servicio)=>servicio.producto)
-    servicio:ServiciosProductoEntity
-
+    @Column({type: "integer"})
+    costo:number;
+    
+    @OneToMany(() => ServiciosProductoEntity,(productos)=>productos.servicio )
+    productos:ServiciosProductoEntity
 }

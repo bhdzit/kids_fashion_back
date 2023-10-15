@@ -28,13 +28,15 @@ export abstract class BaseRepository {
     //    throw new ApiException(msg);
   }
 
-  public async store(entity: BaseEntity): Promise<BaseEntity[]> {
+  public async store(entity: BaseEntity,returnAll:boolean=true): Promise<BaseEntity[]> {
     if (!this.repository) {
       this.throwException('RepositoryIsNotDefined');
     }
-    await this.repository.save(entity);
+    const savedEntity = await this.repository.save(entity);
+    if(returnAll)
     return await this.repository.find();
      
+    return [savedEntity];
   }
 
   public async delete(objectId: number | string): Promise<BaseEntity[]> {
