@@ -112,6 +112,9 @@ export abstract class CrudControllerClass implements ControllerType {
             case 'isNotEmpty':
                     return "No puede estar vacio"                
                 break;
+            case 'min':
+                    return "El numero debe ser mayor a 0"                
+                break;
         
             default:
                 return "Verifica el formato de los datos"
