@@ -8,9 +8,10 @@ import { ProductosModule } from './modules/productos/productos.module';
 import { ServiciosModule } from './modules/servicios/servicios.module';
 import { ServiciosProductosModule } from './modules/servicios/servicios-productos/servicios-productos.module';
 import { UsuariosModule } from './modules/usuarios/usuarios.module';
+import { ServiciosEstilistaModule } from './modules/servicios/servicios-estilista/servicios-estilista.module';
 
 @Module({
-  imports: [ConfigModule.forRoot(),DatabaseModule, ClienteModule, ProductosModule, ServiciosModule, ServiciosProductosModule, UsuariosModule],
+  imports: [ConfigModule.forRoot(),DatabaseModule, ClienteModule, ProductosModule, ServiciosModule, ServiciosProductosModule, UsuariosModule,ServiciosEstilistaModule],
   controllers: [AppController],
   providers: [AppService],
 })
