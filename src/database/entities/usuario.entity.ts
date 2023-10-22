@@ -7,6 +7,7 @@ import {
     PrimaryGeneratedColumn
 } from "typeorm";
 import { ServiciosEstilistaEntity } from "./servicios-estilista.entity";
+import { HorarioEntity } from "./horario.entity";
 
 
 
@@ -30,5 +31,7 @@ export class UsuarioEntity extends BaseEntity {
     @OneToMany(() => ServiciosEstilistaEntity,(usuario)=>usuario.usuario)
     servicios:ServiciosEstilistaEntity;
 
+    @OneToMany(() => HorarioEntity,(usuario)=>usuario.usuario)
+    horario:HorarioEntity;
 
 }
