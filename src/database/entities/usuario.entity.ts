@@ -8,6 +8,7 @@ import {
 } from "typeorm";
 import { ServiciosEstilistaEntity } from "./servicios-estilista.entity";
 import { HorarioEntity } from "./horario.entity";
+import { CitaEntity } from "./cita.entity";
 
 
 
@@ -33,5 +34,9 @@ export class UsuarioEntity extends BaseEntity {
 
     @OneToMany(() => HorarioEntity,(usuario)=>usuario.usuario)
     horario:HorarioEntity;
+
+    @OneToMany(() => CitaEntity,(cita)=>cita.estilista)
+    cita:CitaEntity;
+
 
 }

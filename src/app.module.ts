@@ -10,9 +10,10 @@ import { ServiciosProductosModule } from './modules/servicios/servicios-producto
 import { UsuariosModule } from './modules/usuarios/usuarios.module';
 import { ServiciosEstilistaModule } from './modules/servicios/servicios-estilista/servicios-estilista.module';
 import { HorarioEstilistaModule } from './modules/horario-estilista/horario-estilista.module';
+import { CitasModule } from './modules/citas/citas.module';
 
 @Module({
-  imports: [ConfigModule.forRoot(),DatabaseModule, ClienteModule, ProductosModule, ServiciosModule, ServiciosProductosModule, UsuariosModule,ServiciosEstilistaModule, HorarioEstilistaModule],
+  imports: [ConfigModule.forRoot(),DatabaseModule, ClienteModule, ProductosModule, ServiciosModule, ServiciosProductosModule, UsuariosModule,ServiciosEstilistaModule, HorarioEstilistaModule, CitasModule],
   controllers: [AppController],
   providers: [AppService],
 })

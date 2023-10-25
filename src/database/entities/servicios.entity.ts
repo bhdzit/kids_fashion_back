@@ -8,6 +8,7 @@ import {
 } from "typeorm";
 import { ServiciosProductoEntity } from "./servicios-productos.entity";
 import { ServiciosEstilistaEntity } from "./servicios-estilista.entity";
+import { CitaEntity } from "./cita.entity";
 
 
 @Entity("servicios")
@@ -29,4 +30,7 @@ export class ServiciosEntity extends BaseEntity {
 
     @OneToMany(() => ServiciosEstilistaEntity,(productos)=>productos.servicio )
     estilista:ServiciosEstilistaEntity;
+
+    @OneToMany(() => CitaEntity,(cita)=>cita.servicio)
+    servicio:CitaEntity;
 }
