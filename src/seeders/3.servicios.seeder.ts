@@ -20,7 +20,7 @@ import { ServiciosEntity } from "src/database/entities/servicios.entity";
           const entity = new ServiciosEntity();
           entity.nombre = "Servicio "+i;
           entity.costo = 10*i;
-          entity.tiempo = 10*i;
+          entity.tiempo = 60*i;
           await factory.save(entity);
         
       }
