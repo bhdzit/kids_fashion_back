@@ -16,4 +16,9 @@ export class UsuarioDto {
     @IsNotEmpty()
     readonly usuario: string;
 
+    @IsString()
+    @IsNotEmpty()
+    readonly color: string;
+
+
 }

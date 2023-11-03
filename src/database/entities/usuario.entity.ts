@@ -26,6 +26,9 @@ export class UsuarioEntity extends BaseEntity {
     @Column({type: "varchar",nullable:true})
     password:string;
 
+    @Column({type: "varchar",nullable:true})
+    color:string;
+
     @Column({type: "integer",nullable:true})
     rol:number;
 

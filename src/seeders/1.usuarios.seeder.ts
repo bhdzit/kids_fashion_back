@@ -21,6 +21,7 @@ export default class UsuariosSeeder implements Seeder {
         const entity = new UsuarioEntity();
         entity.nombre = "Estilista "+i;
         entity.usuario = "Estilista "+i;
+        entity.color = "#FF00"+(10*i)
         await factory.save(entity);
       
     }
