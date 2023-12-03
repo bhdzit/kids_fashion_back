@@ -14,5 +14,8 @@ export class CitaDto {
     readonly servicio: number;
 
     @IsNotEmpty()
-    readonly fecha: Date;    
+    readonly fecha: Date;   
+    
+    @IsNotEmpty()
+    readonly cliente:string
 }
