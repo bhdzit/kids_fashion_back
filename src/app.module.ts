@@ -11,9 +11,10 @@ import { UsuariosModule } from './modules/usuarios/usuarios.module';
 import { ServiciosEstilistaModule } from './modules/servicios/servicios-estilista/servicios-estilista.module';
 import { HorarioEstilistaModule } from './modules/horario-estilista/horario-estilista.module';
 import { CitasModule } from './modules/citas/citas.module';
+import { TicketsModule } from './modules/tickets/tickets.module';
 
 @Module({
-  imports: [ConfigModule.forRoot(),DatabaseModule, ClienteModule, ProductosModule, ServiciosModule, ServiciosProductosModule, UsuariosModule,ServiciosEstilistaModule, HorarioEstilistaModule, CitasModule],
+  imports: [ConfigModule.forRoot(),DatabaseModule, ClienteModule, ProductosModule, ServiciosModule, ServiciosProductosModule, UsuariosModule,ServiciosEstilistaModule, HorarioEstilistaModule, CitasModule, TicketsModule],
   controllers: [AppController],
   providers: [AppService],
 })

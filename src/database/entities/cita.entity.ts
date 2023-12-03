@@ -3,11 +3,13 @@ import {
   Column,
   Entity,
   ManyToOne,
+  OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { UsuarioEntity } from './usuario.entity';
 import { ServiciosEntity } from './servicios.entity';
 import { CatCitaEstatusEntity } from './cat-cita-estatus.entity';
+import { TicketEntity } from './tickets.entity';
 
 @Entity('cita')
 export class CitaEntity extends BaseEntity {
@@ -25,4 +27,7 @@ export class CitaEntity extends BaseEntity {
 
   @Column({ type: 'timestamp' })
   fecha: Date;
+
+  @OneToOne(()=>TicketEntity)
+  cita:TicketEntity;
 }
