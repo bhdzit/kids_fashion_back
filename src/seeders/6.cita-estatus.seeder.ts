@@ -17,8 +17,16 @@ import { CatCitaEstatusEntity } from "src/database/entities/cat-cita-estatus.ent
     ): Promise<any> {
         
           const factory = factoryManager.get(CatCitaEstatusEntity);
-          const entity = new CatCitaEstatusEntity();
+          let entity = new CatCitaEstatusEntity();
           entity.estatus = "Pendiente";
+          await factory.save(entity);
+
+          entity = new CatCitaEstatusEntity();
+          entity.estatus = "Finalizada";
+          await factory.save(entity);
+
+          entity = new CatCitaEstatusEntity();
+          entity.estatus = "Cancelada";
           await factory.save(entity);
     }
   }

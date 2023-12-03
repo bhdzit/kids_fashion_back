@@ -3,8 +3,10 @@ import {
     BaseEntity,
     Column,
     Entity,
+    OneToMany,
     PrimaryGeneratedColumn
 } from "typeorm";
+import { CitaEntity } from "./cita.entity";
 
 
 @Entity("cliente")
@@ -26,4 +28,8 @@ export class ClienteEntity extends BaseEntity {
     correo:string;
 
     ultimoCorte:Date;
+
+    @OneToMany(() => CitaEntity,(cita)=>cita.cliente)
+    citas:CitaEntity[];
+
 }

@@ -14,7 +14,7 @@ export class CitasController extends CrudControllerClass{
   @Get('/getCitas')
   @QueryRequest({
     whereFields: ["id"],
-    relationships: ["estilista","servicio","estatus"],
+    relationships: ["estilista","servicio","estatus","ticket","cliente"],
     fields: []
 })
   async getAll(@Req() req: Request,query: QueryRequestFilter): Promise<any> {
