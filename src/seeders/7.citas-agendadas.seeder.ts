@@ -33,7 +33,7 @@ export default class CitaAgendadaSeeder implements Seeder {
       entity2.servicio = Math.floor(Math.random()*9)+1;
       entity2.estilista = Math.floor(Math.random()*9)+1;      
       entity2.fecha = fecha.toISOString().replace(/T.*$/, '') + 'T03:00:00'; // YYYY-MM-DD of today;
-      entity.cliente = 1;
+      entity2.cliente = 1;
       await factory.save(entity2);
 
 
@@ -42,7 +42,7 @@ export default class CitaAgendadaSeeder implements Seeder {
       entity3.servicio = Math.floor(Math.random()*9)+1;
       entity3.estilista = Math.floor(Math.random()*9)+1;      
       entity3.fecha = fecha.toISOString().replace(/T.*$/, '') + 'T06:00:00'; // YYYY-MM-DD of today;
-      entity.cliente = 1;
+      entity3.cliente = 1;
       await factory.save(entity2);
 
     }
