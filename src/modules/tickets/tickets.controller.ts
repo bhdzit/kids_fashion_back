@@ -7,6 +7,7 @@ import { plainToInstance } from 'class-transformer';
 import { ServiciosEntity } from 'src/database/entities/servicios.entity';
 import { CitasService } from '../citas/citas.service';
 import { TicketEntity } from 'src/database/entities/tickets.entity';
+import { CitaEntity } from 'src/database/entities/cita.entity';
 
 @Controller('tickets')
 export class TicketsController extends CrudControllerClass{
@@ -34,11 +35,15 @@ export class TicketsController extends CrudControllerClass{
 
     //Si no exite previa cita
     if(payload.cita.id==undefined){
-      const cita = await this._citasService.store(payload.cita,false);      
+      const cita = await this._citasService.store({...payload.cita,estatus:2},false); 
+      payload.cita=cita;     
+    }
+    else{
+      const cita:any = await this._citasService.update(payload.cita.id,{...payload.cita,estatus:2}) as CitaEntity;
+
     }
     
     const servicios = await this.service.store(payload,false);
-    console.log(servicios)
     return servicios[0] as TicketEntity;
    } catch (error) {
     console.log(error);
